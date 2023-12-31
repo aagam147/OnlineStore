@@ -17,6 +17,7 @@ services:
       - mynetwork
   onlinestorewebapi:
     #container_name: webapi
+    hostname: "webapi"
     build:
       context: .
       dockerfile: OnlineStore.WebApi/Dockerfile
@@ -66,7 +67,7 @@ services:
   onlinestoresql:
     hostname: "sqlserverclient"
     image: "mcr.microsoft.com/mssql/server"
-    container_name: sql_server2022
+    #container_name: sql_server2022
     healthcheck:
       test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "$$SA_PASSWORD" -Q "SELECT 1" || exit 1
       interval: 10s
