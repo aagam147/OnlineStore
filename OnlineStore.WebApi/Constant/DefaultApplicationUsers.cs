@@ -10,12 +10,13 @@ namespace OnlineStore.WebApi.Constant
             {
                 new AppUser{
                 Id = Guid.NewGuid(),
-                UserName = "aagam",
-                Email = "aagamshah4444@gmail.com",
+                UserName = "admin",
+                Email = "admin@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
-                Firstname="SuperAdmin",
-                Lastname="SuperAdmin"
+                Firstname="Admin",
+                Lastname="Admin",
+                IntrestedProduct="All"
                 },
                 new AppUser{
                 Id = Guid.NewGuid(),
@@ -23,8 +24,9 @@ namespace OnlineStore.WebApi.Constant
                 Email = "user@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
-                Firstname="user",
-                Lastname="user"
+                Firstname="User",
+                Lastname="User",
+                IntrestedProduct="All"
                 }
             };
             return defaultUser;

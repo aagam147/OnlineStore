@@ -13,6 +13,8 @@ namespace OnlineStore.ViewModel
         public string FullName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+
+        public string IntrestedProduct { get; set; }
     }
     public class PaginatedList<T> : List<T>
     {

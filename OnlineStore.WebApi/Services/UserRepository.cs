@@ -23,7 +23,7 @@ namespace OnlineStore.WebApi.Services
             var rs = await PaginatedList<AppUser>.CreateFromEfQueryableAsync(users.AsNoTracking(), pageNumber ?? 1,
                 pageSize ?? 12);
             var userViewModels = rs.Select(user => new UsersViewModel
-            { Id = user.Id, UserName = user.UserName, Email = user.Email,FirstName=user.Firstname,LastName=user.Lastname,FullName=user.Fullname }).ToList();
+            { Id = user.Id, UserName = user.UserName, Email = user.Email,FirstName=user.Firstname,LastName=user.Lastname,FullName=user.Fullname,IntrestedProduct=user.IntrestedProduct }).ToList();
             var response = new PaginatedList<UsersViewModel>(userViewModels, rs.Count, pageNumber ?? 1, pageSize ?? 10);
             return response;
         }

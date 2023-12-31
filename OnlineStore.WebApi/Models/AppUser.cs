@@ -13,5 +13,7 @@ namespace OnlineStore.WebApi.Models
         public string Fullname => $"{Firstname} {Lastname}";
 
         public DateTime DateCreated { get; set; } = DateTime.Now;
+
+        public string IntrestedProduct { get; set; }
     }
 }

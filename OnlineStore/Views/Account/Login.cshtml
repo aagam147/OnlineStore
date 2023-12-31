@@ -10,14 +10,14 @@
             @Html.ValidationMessage("error")
             </span>
             <div class="form-outline mb-4">
-                <label class="form-label" for="UserName">UserName</label>
+                <label class="form-label" for="UserName">UserName</label><span class="text-danger">*</span>
                 <input type="text" class="form-control" asp-for="UserName" placeholder="Enter Username" />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
 
             
             <div class="form-outline mb-4">
-                <label class="form-label" for="Password">Password</label>
+                <label class="form-label" for="Password">Password</label><span class="text-danger">*</span>
                 <input type="password" class="form-control" asp-for="Password" autocomplete="off" placeholder="Enter Password" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
