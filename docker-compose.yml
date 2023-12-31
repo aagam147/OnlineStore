@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  onlinestore.mvc:
+    build:
+      context: .
+      dockerfile: OnlineStore/Dockerfile
+    ports:
+      - "5002:80"
+    depends_on:
+      - onlinestore.webapi
+    links: 
+      - onlinestore.webapi
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Docker"
+    networks:
+      - mynetwork
+  onlinestore.webapi:
+    container_name: webapi
+    build:
+      context: .
+      dockerfile: OnlineStore.WebApi/Dockerfile
+    ports:
+      - "8001:8001"
+    depends_on:
+      onlinestoresql:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Docker"
+      ASPNETCORE_URLS: http://+:8001
+    networks:
+      - mynetwork
+  onlinestore.worker:
+    build:
+      context: .
+      dockerfile: OnlineStoreWorker/Dockerfile
+    ports:
+      - "5001:8443"
+    depends_on:
+      onlinestoremq:
+        condition: service_healthy
+    links: 
+      - onlinestoremq
+    environment:
+      HOSTNAME: "rabbitmq"
+  onlinestoremq:
+    image: "rabbitmq:3-management"
+    hostname: "rabbitmq"
+    ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+      - "25672:25672"
+      - "15671:15671"
+      - "15672:15672"
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
+  onlinestoresql:
+    hostname: "sqlserverclient"
+    image: "mcr.microsoft.com/mssql/server"
+    container_name: sql_server2022
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "$$SA_PASSWORD" -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    environment:
+      SA_PASSWORD: "Abc@1234"  # Change this to your desired password
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+    networks:
+      - mynetwork
+    volumes:
+      - ./data:/var/opt/mssql/data
+      - ./log:/var/opt/mssql/log
+      - ./secrets:/var/opt/mssql/secrets
+networks:
+  mynetwork:

@@ -1,0 +1,39 @@
+﻿@using OnlineStore.ViewModel;
+@model ProductViewModel
+<div class="creates">
+    <form action="Create" method="Post">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <label for="ProductName">Product Name</label>
+                <input class="form-control" type="text" asp-for="ProductName"/>
+                <span class="text-danger" asp-validation-for="ProductName"></span>
+            </div>
+            <div class="col-lg-6 col-12">
+                <label for="ProductDescription">Description</label>
+                <input class="form-control" type="text" asp-for="ProductDescription" />
+                <span class="text-danger" asp-validation-for="ProductDescription"></span>
+            </div>
+            <div class="col-lg-6 col-12">
+                <label for="ProductPrice">Price</label>
+                <input class="form-control" asp-for="ProductPrice" />
+                <span class="text-danger" asp-validation-for="ProductPrice"></span>
+            </div>
+            <div class="col-lg-6 col-12">
+                <label for="ProductStock">Stock</label>
+                <input class="form-control" asp-for="ProductStock" />
+                <span class="text-danger" asp-validation-for="ProductStock"></span>
+            </div>
+            <div class="col-lg-6 col-12">
+                <label for="Category">Category</label>
+
+                @Html.DropDownListFor(o => o.Category, Enum.GetValues(typeof(ProductCategory)).Cast<ProductCategory>
+                    ().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }),new { @class = "form-select" })
+                <span class="text-danger" asp-validation-for="Category"></span>
+            </div>
+
+            <div class="col-12 mt-2">
+                <button type="submit" class=" btn btn-primary"> Create Product</button>
+            </div>
+        </div>
+    </form>
+</div>

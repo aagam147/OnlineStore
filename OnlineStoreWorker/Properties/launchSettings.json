@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "OnlineStoreWorker": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

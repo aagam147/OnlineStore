@@ -1,0 +1,78 @@
+﻿@using OnlineStore.ViewModel
+@model PaginatedList<UsersViewModel>
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+        <div class="header-title">
+            <h4 class="card-title">Users</h4>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive mt-4">
+            <table id="basic-table" class="table table-striped mb-0" role="grid">
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>UserName</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FullName)
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <h6>@Html.DisplayFor(modelItem => item.UserName)</h6>
+                                </div>
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer clearfix">
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+            <div class="row">
+                <div class="col">
+                    <ul class="pagination float-right">
+                        <li>
+                            <a asp-action="Index"
+                               asp-route-pageNumber="@(Model.PageIndex - 1)"
+                               class="btn btn-default @prevDisabled">
+                                Previous
+                            </a>
+                        </li>
+                        @for (var i = 1; i <= Model.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.PageIndex ? "active" : "")" style="z-index: 0;">
+                                <a asp-action="Index"
+                                   asp-route-pageNumber="@i"
+                                   class="page-link">@i</a>
+                            </li>
+                        }
+                        <li>
+                            <a asp-action="Index"
+                               asp-route-pageNumber="@(Model.PageIndex + 1)"
+                               class="btn btn-default @nextDisabled">
+                                Next
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

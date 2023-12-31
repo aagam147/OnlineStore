@@ -1,0 +1,42 @@
+﻿@using OnlineStore.ViewModel
+@model List<ProductViewModel>
+
+
+<div class="row">
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="col-12 text-end">
+            <a asp-area="" asp-controller="Product" asp-action="Create" class="btn btn-primary  me-2"> Add Product</a>
+        </div>
+    }
+    @foreach(var item in Model)
+    {
+        <div class="col-auto col-sm-3">
+            <div class="card m-2">
+                <div class="card-body">
+                    <div class="fs-5 fw-bold text-center">
+                        @item.ProductName
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        Price: $ @item.ProductPrice 
+                    </div>
+                    <div>
+                        Available Stock: @item.ProductStock
+                    </div>
+                    <div>
+                        Category: @item.Category
+                    </div>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div class="text-end">
+                            <a asp-area="" asp-controller="Product" asp-action="Edit" class="btn btn-primary btn-sm" asp-route-id="@item.Id">Edit</a>
+                            <a asp-area="" asp-controller="Product" asp-action="Delete" class="btn btn-danger btn-sm" asp-route-id="@item.Id">Delete</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
