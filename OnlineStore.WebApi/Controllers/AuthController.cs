@@ -67,7 +67,8 @@ namespace OnlineStore.WebApi.Controllers
                 UserName= model.UserName,
                 Firstname= model.Firstname,
                 Lastname= model.Lastname,
-                Email=model.Email
+                Email=model.Email,
+                IntrestedProduct=model.IntrestedProduct
             };
             var result = await userManager.CreateAsync(user, model.Password);
             await userManager.AddToRoleAsync(user, "User");

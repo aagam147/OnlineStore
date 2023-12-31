@@ -12,7 +12,7 @@ using OnlineStore.WebApi.Data;
 namespace OnlineStore.WebApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231231043338_init")]
+    [Migration("20231231143055_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -193,6 +193,10 @@ namespace OnlineStore.WebApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("IntrestedProduct")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Lastname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -248,6 +252,10 @@ namespace OnlineStore.WebApi.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductDescription")
                         .IsRequired()
