@@ -50,13 +50,19 @@ namespace OnlineStore.Controllers
                     var msg = await response.Content.ReadAsStringAsync();
                     try
                     {
-                        var result = JsonConvert.DeserializeObject<ApiErrorViewModel>(msg);
-                        ModelState.AddModelError("error", result.Message);
+                        if (!string.IsNullOrEmpty(msg))
+                        {
+                            var result = JsonConvert.DeserializeObject<ApiErrorViewModel>(msg);
+                            ModelState.AddModelError("error", result.Message);
+                        }
                     }
                     catch (Exception ex)
                     {
-                        var result = JsonConvert.DeserializeObject<ApiErrorModel>(msg);
-                        ModelState.AddModelError("error", result.Result.FirstOrDefault()?.description);
+                        if (!string.IsNullOrEmpty(msg))
+                        {
+                            var result = JsonConvert.DeserializeObject<ApiErrorModel>(msg);
+                            ModelState.AddModelError("error", result.Result.FirstOrDefault()?.description);
+                        }
                     }
                     
                     return View(model);
@@ -120,15 +126,20 @@ namespace OnlineStore.Controllers
                 if (!response.IsSuccessStatusCode)
                 {
                     var msg = await response.Content.ReadAsStringAsync();
-                    
                     try
                     {
-                        var result = JsonConvert.DeserializeObject<ApiErrorViewModel>(msg);
-                        ModelState.AddModelError("error", result.Message);
+                        if (!string.IsNullOrEmpty(msg))
+                        {
+                            var result = JsonConvert.DeserializeObject<ApiErrorViewModel>(msg);
+                            ModelState.AddModelError("error", result.Message);
+                        }
                     }
                     catch (Exception ex) {
-                        var result = JsonConvert.DeserializeObject<ApiErrorModel>(msg);
-                        ModelState.AddModelError("error", result.Result.FirstOrDefault()?.description);
+                        if (!string.IsNullOrEmpty(msg))
+                        {
+                            var result = JsonConvert.DeserializeObject<ApiErrorModel>(msg);
+                            ModelState.AddModelError("error", result.Result.FirstOrDefault()?.description);
+                        }
                     }
                     return View(model);
                 }
@@ -140,6 +151,7 @@ namespace OnlineStore.Controllers
             }
             else
             {
+                Console.WriteLine("MODEL NOT VALID"); ;
                 return View(model);
             }
         }
