@@ -1,5 +1,8 @@
 ﻿@using OnlineStore.ViewModel;
 @model ProductViewModel
+@{
+    ViewData["Title"] = "Edit Product";
+}
 <div class="edit">
     <form action="Edit" method="Post">
         <input type="hidden" asp-for="Id"/>
