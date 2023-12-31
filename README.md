@@ -9,7 +9,7 @@
   - docker service scale onlinestore_onlinestoremvc=3
 - docker swarm leave --force
 
-#How to use  
+# How to use  
 - Run on - http://localhost:5000/
 - Admin Credentials
   - UserName: admin
