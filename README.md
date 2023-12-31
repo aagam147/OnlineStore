@@ -5,7 +5,6 @@
 
   
 - docker swarm init
-- docker swarm join --token ......
 - docker stack deploy -c compose.yml onlinestore
   - docker service scale onlinestore_onlinestoremvc=3
 - docker swarm leave --force
