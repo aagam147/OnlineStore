@@ -28,6 +28,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: "Docker"
       ASPNETCORE_URLS: http://+:8001
+      MQHOSTNAME: "rabbitmq"
     networks:
       - mynetwork
   onlinestore.worker:
@@ -43,6 +44,8 @@ services:
       - onlinestoremq
     environment:
       HOSTNAME: "rabbitmq"
+    networks:
+      - mynetwork
   onlinestoremq:
     image: "rabbitmq:3-management"
     hostname: "rabbitmq"
@@ -58,6 +61,8 @@ services:
       interval: 30s
       timeout: 30s
       retries: 3
+    networks:
+      - mynetwork
   onlinestoresql:
     hostname: "sqlserverclient"
     image: "mcr.microsoft.com/mssql/server"
@@ -75,9 +80,6 @@ services:
       - "1433:1433"
     networks:
       - mynetwork
-    volumes:
-      - ./data:/var/opt/mssql/data
-      - ./log:/var/opt/mssql/log
-      - ./secrets:/var/opt/mssql/secrets
+
 networks:
   mynetwork:
